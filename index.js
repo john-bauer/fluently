@@ -6,7 +6,7 @@ const app = require('express')();
 const http = require('http').Server(app);
 
 app.get('/', function(req, res){
-  res.send('<h1>hello express</h1>');
+  res.sendFile(__dirname + '/index.html');
 });
 
 /*------ listen on 8080 ------*/
