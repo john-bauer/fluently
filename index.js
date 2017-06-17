@@ -27,6 +27,12 @@ io.on('connection', function(socket){
   });
 });
 
+/*------- emit message to channel ---*/
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
 /*------ listen on 8080 ------*/
 http.listen(8080, function(){
   console.log('listening on port 8080');
