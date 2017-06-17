@@ -1,0 +1,23 @@
+{
+  "name": "fluently",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/john-bauer/fluently.git"
+  },
+  "author": "John Bauer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/john-bauer/fluently/issues"
+  },
+  "homepage": "https://github.com/john-bauer/fluently#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.3"
+  }
+}
