@@ -17,22 +17,21 @@ const language_translator = watson.language_translator({
   version: "v2"
 });
 
-translate = (msg) => {
-  console.log('translating');
-  language_translator.translate({
+translate = (msg, callback) => {
+    language_translator.translate({
     text: msg,
     source: "en",
-    target: "es"
+    target: "es",
   }, function(err, translation) {
+    let output;
     if (err){
       output = "error";
       console.log(output);
-      return output;
+      callback(err);
     }
     else {
-      let output = (translation.translations[0].translation);
-      console.log(output);
-      return output;
+      output = (translation.translations[0].translation);
+      callback(null, output);
     }
   });
 }
@@ -60,7 +59,14 @@ io.on('connection', function(socket){
 /*------- emit message to channel ---*/
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+    translate(msg, (err, output) => {
+      if (err) {
+        console.log('error')
+        return;
+      } else {
+      io.emit('new message', output);
+      }
+    });
   });
 });
 
