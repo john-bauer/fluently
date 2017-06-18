@@ -21,7 +21,7 @@ const translate = function (msg, callback) {
     language_translator.translate({
     text: msg,
     source: "en",
-    target: "es",
+    target: "it",
   }, function(err, translation) {
     let output;
     if (err){
@@ -59,6 +59,7 @@ io.on('connection', function(socket){
 /*------- emit message to channel ---*/
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
+    io.sockets.emit('chat message', msg);
     translate(msg, function (err, output) {
       if (err) {
         console.log('error')
