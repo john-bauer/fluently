@@ -17,7 +17,7 @@ const language_translator = watson.language_translator({
   version: "v2"
 });
 
-translate = (msg, callback) => {
+const translate = function (msg, callback) {
     language_translator.translate({
     text: msg,
     source: "en",
@@ -34,7 +34,7 @@ translate = (msg, callback) => {
       callback(null, output);
     }
   });
-}
+};
 
 /*================================
           ROUTES
@@ -59,12 +59,12 @@ io.on('connection', function(socket){
 /*------- emit message to channel ---*/
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
-    translate(msg, (err, output) => {
+    translate(msg, function (err, output) {
       if (err) {
         console.log('error')
         return;
       } else {
-      io.emit('new message', output);
+      io.sockets.emit('chat message', output);
       }
     });
   });
